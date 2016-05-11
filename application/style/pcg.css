@@ -5,6 +5,7 @@
         font-size: 13px;
         font-weight: 400;
         opacity: 0.87;
+        filter: alpha(opacity=87);
     }
 }
 
@@ -36,12 +37,24 @@
 }
 
 #PixelCircleGenerator {
-    align-content: center;
-    align-items: flex-start;
+    -webkit-align-content: center;
+       -ms-flex-line-pack: center;
+            align-content: center;
+      -webkit-box-align: start;
+    -webkit-align-items: flex-start;
+         -ms-flex-align: start;
+            align-items: flex-start;
     box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-justify-content: space-around;
+              -ms-flex-pack: distribute;
+            justify-content: space-around;
     padding: 72px 8px 56px 8px;
 }
 
@@ -57,8 +70,13 @@
 
 #DimensionsAndOverviewWrapper {
     box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: column wrap;
+    -webkit-flex-flow: column wrap;
+        -ms-flex-flow: column wrap;
+            flex-flow: column wrap;
     min-width: 344px;
 }
 
@@ -73,16 +91,32 @@
 }
 
 #DimensionsInput {
-    align-content: center;
-    align-items: center;
+    -webkit-align-content: center;
+       -ms-flex-line-pack: center;
+            align-content: center;
+        -webkit-box-align: center;
+      -webkit-align-items: center;
+           -ms-flex-align: center;
+              align-items: center;
     box-sizing: border-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
     display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
+    -webkit-flex-flow: row wrap;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+              -ms-flex-pack: start;
+            justify-content: flex-start;
 }
 
 .InputField { 
-    flex-grow: 1;
+     -webkit-box-flex: 1; 
+    -webkit-flex-grow: 1; 
+    -ms-flex-positive: 1; 
+            flex-grow: 1;
     margin: 16px 8px;
     position: relative;
 }
@@ -100,7 +134,8 @@
     content: '';
     height: 2px; 
     position: absolute;
-    transition: 0.2s ease all; 
+    -webkit-transition: 0.2s ease all;
+            transition: 0.2s ease all; 
     width: 0;
 }
 
@@ -116,6 +151,7 @@
     bottom: 0;
     left: 0;
     opacity: 0.5;
+    filter: alpha(opacity=50);
     pointer-events: none;
     position: absolute;
     top: 0;
@@ -138,7 +174,8 @@
     padding: 8px 16px;
     position: absolute;
     right: 0;
-    transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+    -webkit-transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
 }
 
 #visualise:hover {
@@ -151,8 +188,26 @@
     box-shadow: 0 2px 1.5px 0 rgba(0, 0, 0, .12), 0 0 4px 0 rgba(0, 0, 0, .12);
 }
 
+#circumference {
+	cursor: text;
+	-webkit-user-select: text;
+	   -moz-user-select: text;
+	    -ms-user-select: text;
+	        user-select: text;
+}
+
+.noselect {
+    -webkit-user-select: none !important;
+       -moz-user-select: none !important;
+        -ms-user-select: none !important;
+            user-select: none !important;
+}
+
 #VisualWrapper {
-    flex-grow: 2;
+     -webkit-box-flex: 2;
+    -webkit-flex-grow: 2;
+    -ms-flex-positive: 2;
+            flex-grow: 2;
     min-width: 344px;
     overflow: hidden;
     width: 0;
@@ -167,15 +222,19 @@
 }
 
 .spinner {
-    animation: rotator 1.4s linear infinite;
+    -webkit-animation: rotator 1.4s linear infinite;
+            animation: rotator 1.4s linear infinite;
 }
 
 .path {
-    animation: dash 1.4s ease-in-out infinite;
+    -webkit-animation: dash 1.4s ease-in-out infinite;
+            animation: dash 1.4s ease-in-out infinite;
     stroke-dasharray: 187;
     stroke-dashoffset: 0;
     stroke: #1E88E5;
-    transform-origin: center;
+    -webkit-transform-origin: center;
+        -ms-transform-origin: center;
+            transform-origin: center;
 }
 
 #lightbox {
@@ -198,6 +257,19 @@
     width: 320px;
 }
 
+@-webkit-keyframes inputHighlighter {
+    0%  {
+        background: #1E88E5;
+    }
+    99% {
+        background: transparent;
+        width: 100%;
+    }
+    100% {
+        width: 0;
+    }
+}
+
 @keyframes inputHighlighter {
     0%  {
         background: #1E88E5;
@@ -211,12 +283,41 @@
     }
 }
 
-@keyframes rotator {
+@-webkit-keyframes rotator {
     0% {
-        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
     }
     100% {
-        transform: rotate(270deg);
+        -webkit-transform: rotate(270deg);
+                transform: rotate(270deg);
+    }
+}
+
+@keyframes rotator {
+    0% {
+        -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(270deg);
+                transform: rotate(270deg);
+    }
+}
+
+@-webkit-keyframes dash {
+    0% {
+        stroke-dashoffset: 187;
+    }
+    50% {
+        stroke-dashoffset: 46.75;
+        -webkit-transform: rotate(135deg);
+                transform: rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: 187;
+        -webkit-transform: rotate(450deg);
+                transform: rotate(450deg);
     }
 }
 
@@ -226,10 +327,12 @@
     }
     50% {
         stroke-dashoffset: 46.75;
-        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+                transform: rotate(135deg);
     }
     100% {
         stroke-dashoffset: 187;
-        transform: rotate(450deg);
+        -webkit-transform: rotate(450deg);
+                transform: rotate(450deg);
     }
 }
