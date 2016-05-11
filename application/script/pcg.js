@@ -163,8 +163,10 @@ window.onload = function() {
         drawGrid();
     }
 
-    canvas.addEventListener('mousedown', function(e) {
-        document.body.style.mozUserSelect = document.body.style.webkitUserSelect = document.body.style.userSelect = 'none';
+    canvas.addEventListener("mousedown", function(e) {
+        for(var i = document.getElementsByTagName("*").length - 1; i >= 0; i--) {
+            document.getElementsByTagName("*")[i].classList.add("noselect");
+        }
 
         lastX = e.offsetX || (e.pageX - canvas.offsetLeft);
         lastY = e.offsetY || (e.pageY - canvas.offsetTop);
@@ -172,7 +174,7 @@ window.onload = function() {
         dragged = false;
     }, false);
 
-    canvas.addEventListener('mousemove', function(e) {
+    canvas.addEventListener("mousemove", function(e) {
         lastX = e.offsetX || (e.pageX - canvas.offsetLeft);
         lastY = e.offsetY || (e.pageY - canvas.offsetTop);
         dragged = true;
@@ -184,15 +186,20 @@ window.onload = function() {
         }
     }, false);
 
-    canvas.addEventListener('mouseup', function(e) {
+    canvas.addEventListener("mouseup", function(e) {
+        for(var i = document.getElementsByTagName("*").length - 1; i >= 0; i--) {
+            document.getElementsByTagName("*")[i].classList.remove("noselect");
+        }
+
         dragStart = null;
+
         if(!dragged) {
             // add highlighting logic here
         }
     }, false);
 
-    canvas.addEventListener('DOMMouseScroll', handleScroll, false);
-    canvas.addEventListener('mousewheel', handleScroll, false);
+    canvas.addEventListener("DOMMouseScroll", handleScroll, false);
+    canvas.addEventListener("mousewheel", handleScroll, false);
 
     radiusInput.addEventListener("keyup", function(e) {
         updateValues(radiusInput);
@@ -217,7 +224,7 @@ window.onload = function() {
     loading.style.display = "none";
 
     if(isBetaVersion) {
-        var betaNotice = document.createElement('span');
+        var betaNotice = document.createElement("span");
 
         betaNotice.id = "BetaNotice";
         betaNotice.innerHTML = "βῆτα v" + version;
