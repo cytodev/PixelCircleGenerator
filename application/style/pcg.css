@@ -1,0 +1,235 @@
+@media screen and (max-width: 450px) {
+    #BetaNotice {
+        box-sizing: border-box;
+        display: block;
+        font-size: 13px;
+        font-weight: 400;
+        opacity: 0.87;
+    }
+}
+
+@media screen and (min-width: 451px) {
+    #BetaNotice {
+        background-color: #FF8F00;
+        box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+        box-sizing: border-box;
+        display: inline-block;
+        height: 72px;
+        margin-left: 16px;
+        margin-top: -16px;
+        max-height: 72px;
+        padding: 16px 24px;
+        position: relative;
+    }
+
+    #BetaNotice:after {
+        border-color: transparent #FF6F00 transparent transparent;
+        border-style: solid;
+        border-width: 0 8px 8px 0;
+        bottom: 0px;
+        content: '';
+        height: 0;
+        left: -8px;
+        position: absolute;
+        width: 0;
+    }
+}
+
+#PixelCircleGenerator {
+    align-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 72px 8px 56px 8px;
+}
+
+.cardview {
+    background-color: #FAFAFA;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    box-sizing: border-box;
+    margin: 8px;
+    padding: 16px;
+    position: relative;
+}
+
+#DimensionsAndOverviewWrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column wrap;
+    min-width: 344px;
+}
+
+#DimensionsWrapper {
+    max-width: 600px;
+    position: relative;
+}
+
+#OverviewWrapper {
+    max-width: 600px;
+    position: relative;
+}
+
+#DimensionsInput {
+    align-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+}
+
+.InputField { 
+    flex-grow: 1;
+    margin: 16px 8px;
+    position: relative;
+}
+
+.bar {
+    display: block;
+    position: relative;
+    width: 100%;
+}
+
+.bar:before,
+.bar:after {
+    background: #1E88E5; 
+    bottom: 1px; 
+    content: '';
+    height: 2px; 
+    position: absolute;
+    transition: 0.2s ease all; 
+    width: 0;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%; 
+}
+
+.highlight {
+    bottom: 0;
+    left: 0;
+    opacity: 0.5;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+#ButtonWrapper {
+    height: 31px;
+    position: relative;
+}
+
+#visualise {
+    background-color: #1E88E5;
+    border-radius: 2px;
+    border: none;
+    box-shadow: 0 2px 1.5px 0 rgba(0, 0, 0, .12), 0 0 4px 0 rgba(0, 0, 0, .12);
+    color: #F5F5F5;
+    cursor: pointer;
+    display: block;
+    padding: 8px 16px;
+    position: absolute;
+    right: 0;
+    transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+#visualise:hover {
+    background-color: #2196F3;
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
+};
+
+#visualise:active {
+    background-color: #0D47A1;
+    box-shadow: 0 2px 1.5px 0 rgba(0, 0, 0, .12), 0 0 4px 0 rgba(0, 0, 0, .12);
+}
+
+#VisualWrapper {
+    flex-grow: 2;
+    min-width: 344px;
+    overflow: hidden;
+    width: 0;
+}
+
+#loading {
+    left: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
+    position: absolute;
+    top: 50%;
+}
+
+.spinner {
+    animation: rotator 1.4s linear infinite;
+}
+
+.path {
+    animation: dash 1.4s ease-in-out infinite;
+    stroke-dasharray: 187;
+    stroke-dashoffset: 0;
+    stroke: #1E88E5;
+    transform-origin: center;
+}
+
+#lightbox {
+    background-color: rgba(33, 33, 33, 0.33);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 100;
+}
+
+#popup {
+    height: 180px;
+    left: 50%;
+    margin-left: -160px;
+    margin-top: -90px;
+    position: absolute;
+    top: 50%;
+    width: 320px;
+}
+
+@keyframes inputHighlighter {
+    0%  {
+        background: #1E88E5;
+    }
+    99% {
+        background: transparent;
+        width: 100%;
+    }
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes rotator {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 187;
+    }
+    50% {
+        stroke-dashoffset: 46.75;
+        transform: rotate(135deg);
+    }
+    100% {
+        stroke-dashoffset: 187;
+        transform: rotate(450deg);
+    }
+}

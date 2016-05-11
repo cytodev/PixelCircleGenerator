@@ -1,0 +1,117 @@
+<!doctype html>
+    <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="description" content="The Pixel Circle Generator is a tool to generate pixelated circles. It is usefull for block based games such as Minecraft or RimWorld, and might have other applications as well." />
+            <meta name="keywords" content="PCG, Pixel Circle Generator, pixel circle, pixel, circle, generator, circle from radius, circle from surface area" />
+            <meta name="robots" content="index, follow" />
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+            <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+            <meta name="format-detection" content="telephone=no">
+            <meta name="HandheldFriendly" content="True" />
+            <meta name="msapplication-TileColor" content="#1565C0">
+            <meta name="msapplication-TileImage" content="favicon/ms-icon-144x144.png">
+            <meta name="theme-color" content="#1565C0">
+            <meta name="viewport" content="width=device-width, user-scalable=no">
+            <title>PCG: Pixel Circle Generator</title>
+            <link rel="manifest" href="/manifest.json">
+            <link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
+            <link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
+            <link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
+            <link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
+            <link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
+            <link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
+            <link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
+            <link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
+            <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+            <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-icon-192x192.png">
+            <link rel="canonical" href="https://cytodev.io/">
+            <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:400,500,300,100'>
+            <link rel="stylesheet" type="text/css" href="style/normalize.css">
+            <link rel="stylesheet" type="text/css" href="style/main.css">
+            <link rel="stylesheet" type="text/css" href="style/pcg.css">
+        </head>
+
+        <body>
+            <header>
+                <h1>Pixel Circle Generator</h1>
+            </header>
+            <div id="PixelCircleGenerator">
+                <div id="DimensionsAndOverviewWrapper">
+                    <div id="DimensionsWrapper" class="cardview">
+                        <h3>Dimensions</h3>
+                        <form id="DimensionsInput" >
+                            <div class="InputField">
+                                <input id="radius" type="decimal" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Radius</label>
+                            </div>
+                            <div class="InputField">
+                                <input id="area" type="decimal" required>
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Area</label>
+                            </div>
+                        </form>
+                        <div id="ButtonWrapper">
+                            <button id="visualise">VISUALISE</button>
+                        </div>
+                    </div>
+                    <div id="OverviewWrapper" class="cardview">
+                        <h3>Overview</h3>
+                        <p>Current circumference (C): <span id="circumference">0</span></p>
+                        <p>Things to keep in mind<br />
+                        The Pixel Circle Generator uses your device's computing power to generate the visual representation. It is recommended to keep values below a circumference of 1000.</p>
+                        <p>How Pixel Circle Calculator calculates your pixel circle<br />
+                        Since half pixels would be ridiculous and impossible the Pixel Circle Generator uses some simple rounding math to find the nearest pixel to fill. This follows the basic math of a circle but rounds it to the nearest value.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Want to calculate it yourself?</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>From radius (r)</td>
+                                    <td>C = 2&times;&Pi;&times;r</td>
+                                </tr>
+                                <tr>
+                                    <td>From surface area (A)</td>
+                                    <td>C = 2&times;&Pi;&times;&radic;<span style="border-top: 1px solid">A&divide;&Pi;</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="VisualWrapper" class="cardview">
+                    <h3>Visual Representation</h3>
+                    <div id="loading">
+                        <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                            <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                    </div>
+                    <canvas id="Visualisation">Your browser does not support the HTML5 canvas element.</canvas>
+                </div>
+            </div>
+            <footer>
+                <p><a href="" target="_blank">known issues</a></p>
+                <p>&copy; 2016 <a href="https://cytodev.io/" target="_blank">cytodev</a></p>
+                <p><a href="https://github.com/cytodev/" target="_blank">github</a></p>
+            </footer>
+            <noscript>
+                <div id="lightbox">
+                    <div id="popup" class="cardview">
+                        <h3>Whoops!</h3>
+                        <p>For the Pixel Circle Generator to work you need to have JavaScript enabled.<br />
+                        It might also be a smart move to upgrade your browser to the latest version because the Pixel Circle Generator uses some nifty HTML5 APIs that would otherwise not be available.</p>
+                    </div>
+                </div>
+            </noscript>
+            <script type="text/javascript" src="script/pcg.js"></script>
+        </body>
+    </html>

@@ -1,0 +1,13 @@
+
+RewriteEngine on
+
+RewriteOptions inherit
+RewriteCond %{HTTP_HOST} ^pcg\.cytodev\.io$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.pcg\.cytodev\.io$
+RewriteRule ^pcg$ "https\:\/\/pcg\.cytodev\.io\/" [R=301,L]
+
+ErrorDocument 400 https://error.cytodev.io/400
+ErrorDocument 401 https://error.cytodev.io/401
+ErrorDocument 403 https://error.cytodev.io/403
+ErrorDocument 404 https://error.cytodev.io/404
+ErrorDocument 500 https://error.cytodev.io/500
