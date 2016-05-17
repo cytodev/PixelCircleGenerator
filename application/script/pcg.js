@@ -4,9 +4,10 @@
  *
  */
 
-let isBetaVersion = true, version = 0.1;
+let isBetaVersion = true, version = 0.1.1;
 
 window.onload = function() {
+    var continuousSwitch = document.getElementById("ContinuousSwitch");
     var radiusInput = document.getElementById("radius");
     var areaInput = document.getElementById("area");
     var visualise = document.getElementById("visualise");
@@ -21,6 +22,7 @@ window.onload = function() {
     var dragStart;
     var dragged;
     var scaleFactor = 1.1;
+    var continuous = false;
 
     var zoom = function(clicks) {
         var pt = canvasContext.transformedPoint(lastX, lastY);
@@ -145,6 +147,17 @@ window.onload = function() {
             drawPixel(radius - y, radius - x);
             drawPixel(radius - x, radius - y);
 
+            if(continuous) {
+                drawPixel(radius + x + 2, radius - y);
+                drawPixel(radius + y + 1, radius - x - 1);
+                drawPixel(radius + y + 1, radius + x + 2);
+                drawPixel(radius + x + 2, radius + y + 1);
+                drawPixel(radius - x - 1, radius + y + 1);
+                drawPixel(radius - y, radius + x + 2);
+                drawPixel(radius - y, radius - x - 1);
+                drawPixel(radius - x - 1, radius - y);
+            }
+
             if (d < 0) {
                 d = d + (Math.PI * x) + (Math.PI * 2);
             } else {
@@ -200,6 +213,10 @@ window.onload = function() {
 
     canvas.addEventListener("DOMMouseScroll", handleScroll, false);
     canvas.addEventListener("mousewheel", handleScroll, false);
+
+    continuousSwitch.addEventListener("click", function(e) {
+        continuous = continuousSwitch.checked;
+    }, false);
 
     radiusInput.addEventListener("keyup", function(e) {
         updateValues(radiusInput);
