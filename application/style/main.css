@@ -71,7 +71,7 @@ th {
     font-weight: 500;
 }
 
-input {
+input[type=number] {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid #9E9E9E;
@@ -95,38 +95,31 @@ input[type=number]::-webkit-outer-spin-button {
     margin: 0; 
 }
 
-input:focus {
+input[type=number]:focus {
     color: #1E88E5;
     outline: none;
 }
 
-input:focus ~ label,
-input:valid ~ label {
+input[type=number]:focus ~ label,
+input[type=number]:valid ~ label {
     color: #1E88E5;
     font-size: 12px;
     left: 4px;
     top: -16px;
 }
 
-input:focus ~ .bar:before,
-input:focus ~ .bar:after {
+input[type=number]:focus ~ .bar:before,
+input[type=number]:focus ~ .bar:after {
     width: 50%;
 }
 
-input:focus ~ .highlight {
+input[type=number]:focus ~ .highlight {
     -webkit-animation: inputHighlighter 0.3s ease;
             animation: inputHighlighter 0.3s ease;
 }
 
-label {
-    color: #9E9E9E; 
-    font-size: 14px;
-    left: 8px;
-    pointer-events: none;
-    position: absolute;
-    top: 8px;
-    -webkit-transition:0.2s ease all;
-            transition:0.2s ease all; 
+input[type="checkbox"] {
+    display: none;   
 }
 
 table {
