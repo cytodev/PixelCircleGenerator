@@ -54,15 +54,20 @@
                 <div id="DimensionsAndOverviewWrapper">
                     <div id="DimensionsWrapper" class="cardview">
                         <h3>Dimensions</h3>
-                        <form id="DimensionsInput" >
+                            <div class="SwitchField">
+                                Continuous circle
+                                <input id="ContinuousSwitch" type="checkbox"/>
+                                <label for="ContinuousSwitch" class="label-default"></label>
+                            </div>
+                        <form id="DimensionsInput">
                             <div class="InputField">
-                                <input id="radius" type="decimal" required>
+                                <input id="radius" type="number" step="any" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Radius</label>
                             </div>
                             <div class="InputField">
-                                <input id="area" type="decimal" required>
+                                <input id="area" type="number" step="any" required>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Area</label>
