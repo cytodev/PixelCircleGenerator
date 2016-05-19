@@ -1,4 +1,4 @@
-#<img src="https://raw.githubusercontent.com/CytoDev/PixelCircleGenerator/master/application/favicon/favicon-32x32.png" alt="logo" width="32" />&nbsp;Pixel Circle Generator (beta v0.1.1)  
+#<img src="https://raw.githubusercontent.com/CytoDev/PixelCircleGenerator/master/application/favicon/favicon-32x32.png" alt="logo" width="32" />&nbsp;Pixel Circle Generator (beta v0.1.2)  
   
 The Pixel Circle Generator is a tool to generate pixelated circles. It is usefull for block based games such as Minecraft or RimWorld, and might have other applications as well. The live version can be used [here](https://pcg.cytodev.io).  
   ---  
