@@ -4,7 +4,7 @@
  *
  */
 
-let isBetaVersion = true, version = 0.1.1;
+let isBetaVersion = true, version = "0.1.2";
 
 window.onload = function() {
     var continuousSwitch = document.getElementById("ContinuousSwitch");
@@ -19,29 +19,115 @@ window.onload = function() {
     var lastRadius = NaN;
     var lastX = canvas.width / 2;
     var lastY = canvas.height / 2;
+    var touch = {"start": [], "center": {"x": 0, "y": 0}, "offset": [], "delta": [], "zoom": 0};
     var dragStart;
     var dragged;
     var scaleFactor = 1.1;
     var continuous = false;
 
-    var zoom = function(clicks) {
-        var pt = canvasContext.transformedPoint(lastX, lastY);
-        var factor = Math.pow(scaleFactor, clicks);
+    var pointerDown = function(e) {
+        for(var i = document.getElementsByTagName("*").length - 1; i >= 0; i--) {
+            document.getElementsByTagName("*")[i].classList.add("noselect");
+        }
 
-        canvasContext.translate(pt.x, pt.y);
-        canvasContext.scale(factor, factor);
-        canvasContext.translate(-pt.x, -pt.y);
-        redraw();
+        if(e.type === "touchstart") {
+            e.preventDefault();
+
+            touch.center.x = 0;
+            touch.center.y = 0;
+
+            for(var i = 0; i < e.touches.length; i++) {
+                touch.start[i] = {};
+                touch.start[i].x = e.touches[i].pageX;
+                touch.start[i].y = e.touches[i].pageY;
+
+                touch.center.x += touch.start[i].x;
+                touch.center.y += touch.start[i].y;
+            }
+
+            touch.center.x = touch.center.x / touch.start.length;
+            touch.center.y = touch.center.y / touch.start.length;
+
+            lastX = touch.center.x - canvas.offsetLeft;
+            lastY = touch.center.y - canvas.offsetTop;
+        } else {
+            lastX = e.offsetX || (e.pageX - canvas.offsetLeft);
+            lastY = e.offsetY || (e.pageY - canvas.offsetTop);
+        }
+
+        dragStart = canvasContext.transformedPoint(lastX, lastY);
+        dragged = false;
     };
 
-    var handleScroll = function(e){
+    var pointerMove = function(e) {
+        if(e.type === "touchmove") {
+            e.preventDefault();
+            if(e.touches.length > 1) {
+                touch.zoom = 0;
+                dragStart = null;
+
+                for(var i = 0; i < e.touches.length; i++) {
+                    touch.offset[i] = {};
+                    touch.offset[i].x = e.touches[i].pageX;
+                    touch.offset[i].y = e.touches[i].pageY;
+                }
+
+                for(var i = 0; i < touch.start.length; i++) {
+                    touch.delta[i] = {};
+                    touch.delta[i].x = Math.abs(touch.offset[i].x - touch.center.x) - Math.abs(touch.start[i].x - touch.center.x);
+                    touch.delta[i].y = Math.abs(touch.offset[i].y - touch.center.y) - Math.abs(touch.start[i].y - touch.center.y);
+                    touch.zoom += touch.delta[i].x + touch.delta[i].y;
+                }
+
+                handleScroll({"wheelDelta": touch.zoom / 5, "isTouchEvent": true});
+            } else {
+                lastX = e.touches[0].pageX - canvas.offsetLeft;
+                lastY = e.touches[0].pageY - canvas.offsetTop;
+            }
+        } else {        
+            lastX = e.offsetX || (e.pageX - canvas.offsetLeft);
+            lastY = e.offsetY || (e.pageY - canvas.offsetTop);
+        }
+
+        dragged = true;
+
+        if(dragStart) {
+            var pt = canvasContext.transformedPoint(lastX, lastY);
+            canvasContext.translate(pt.x - dragStart.x, pt.y - dragStart.y);
+            redraw();
+        }
+    };
+
+    var pointerUp = function(e) {
+        for(var i = document.getElementsByTagName("*").length - 1; i >= 0; i--) {
+            document.getElementsByTagName("*")[i].classList.remove("noselect");
+        }
+
+        dragStart = null;
+
+        if(!dragged) {
+            // add highlighting logic here
+        }
+    }
+
+    var handleScroll = function(e) {
         var delta = e.wheelDelta ? e.wheelDelta/40 : e.detail ? -e.detail : 0;
 
         if(delta) {
-            zoom(delta);
+            var pt = canvasContext.transformedPoint(lastX, lastY);
+            var factor = Math.pow(scaleFactor, delta);
+
+            canvasContext.translate(pt.x, pt.y);
+            canvasContext.scale(factor, factor);
+            canvasContext.translate(-pt.x, -pt.y);
+            redraw();
         }
 
-        return e.preventDefault() && false;
+        if(!e.isTouchEvent) {
+            return e.preventDefault() && false;
+        } else {
+            return false;
+        }
     };
 
     // scales correctly at times. At other times it doesn't...
@@ -176,43 +262,24 @@ window.onload = function() {
         drawGrid();
     }
 
-    canvas.addEventListener("mousedown", function(e) {
-        for(var i = document.getElementsByTagName("*").length - 1; i >= 0; i--) {
-            document.getElementsByTagName("*")[i].classList.add("noselect");
-        }
+    if(window.PointerEvent) {
+        console.log("Pointer events are supported.");
+        canvas.addEventListener("pointerdown", pointerDown, false);
+        canvas.addEventListener("pointermove", pointerMove, false);
+        canvas.addEventListener("pointerup", pointerUp, false);
+    } else {
+        console.log("Pointer events not supported. Defaulting to mouse and touch events");
+        canvas.addEventListener("mousedown", pointerDown, false);
+        canvas.addEventListener("mousemove", pointerMove, false);
+        canvas.addEventListener("mouseup", pointerUp, false);
 
-        lastX = e.offsetX || (e.pageX - canvas.offsetLeft);
-        lastY = e.offsetY || (e.pageY - canvas.offsetTop);
-        dragStart = canvasContext.transformedPoint(lastX, lastY);
-        dragged = false;
-    }, false);
+        canvas.addEventListener("touchstart", pointerDown, false);
+        canvas.addEventListener("touchmove", pointerMove, false);
+        canvas.addEventListener("touchend", pointerUp, false);
 
-    canvas.addEventListener("mousemove", function(e) {
-        lastX = e.offsetX || (e.pageX - canvas.offsetLeft);
-        lastY = e.offsetY || (e.pageY - canvas.offsetTop);
-        dragged = true;
-
-        if(dragStart) {
-            var pt = canvasContext.transformedPoint(lastX, lastY);
-            canvasContext.translate(pt.x - dragStart.x, pt.y - dragStart.y);
-            redraw();
-        }
-    }, false);
-
-    canvas.addEventListener("mouseup", function(e) {
-        for(var i = document.getElementsByTagName("*").length - 1; i >= 0; i--) {
-            document.getElementsByTagName("*")[i].classList.remove("noselect");
-        }
-
-        dragStart = null;
-
-        if(!dragged) {
-            // add highlighting logic here
-        }
-    }, false);
-
-    canvas.addEventListener("DOMMouseScroll", handleScroll, false);
-    canvas.addEventListener("mousewheel", handleScroll, false);
+        canvas.addEventListener("DOMMouseScroll", handleScroll, false);
+        canvas.addEventListener("mousewheel", handleScroll, false);
+    }
 
     continuousSwitch.addEventListener("click", function(e) {
         continuous = continuousSwitch.checked;
