@@ -54,11 +54,16 @@
                 <div id="DimensionsAndOverviewWrapper">
                     <div id="DimensionsWrapper" class="cardview">
                         <h3>Dimensions</h3>
-                            <div class="SwitchField">
-                                Continuous circle
-                                <input id="ContinuousSwitch" type="checkbox"/>
-                                <label for="ContinuousSwitch" class="label-default"></label>
-                            </div>
+                        <div class="SwitchField">
+                            Continuous circle
+                            <input id="ContinuousSwitch" type="checkbox"/>
+                            <label for="ContinuousSwitch" class="label-default"></label>
+                        </div>
+                        <div class="SwitchField">
+                            Clear on visualise
+                            <input id="ClearSwitch" type="checkbox" checked/>
+                            <label for="ClearSwitch" class="label-default"></label>
+                        </div>
                         <form id="DimensionsInput">
                             <div class="InputField">
                                 <input id="radius" type="number" step="any" required>
@@ -74,6 +79,7 @@
                             </div>
                         </form>
                         <div id="ButtonWrapper">
+                            <button id="ClearButton">CLEAR</button>
                             <button id="visualise">VISUALISE</button>
                         </div>
                     </div>
