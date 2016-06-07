@@ -287,7 +287,7 @@ var pcg = {
                             touchData.zoom += touchData.delta[i].x + touchData.delta[i].y;
                         }
 
-                        this.scroll({"wheelDelta": touchData.zoom / 5, "isTouchEvent": true});
+                        // this.events.zoom({"wheelDelta": touchData.zoom / 5, "isTouchEvent": true});
                     } else {
                         configuration.lastX = e.touches[0].pageX - canvasElement.offsetLeft;
                         configuration.lastY = e.touches[0].pageY - canvasElement.offsetTop;
@@ -320,7 +320,7 @@ var pcg = {
                     // add highlighting logic here
                 }
             },
-            scroll: function(e) {
+            zoom: function(e) {
                 var canvas        = this.canvas;
                 var configuration = this.configuration;
                 var delta         = e.wheelDelta ? e.wheelDelta/40 : e.detail ? -e.detail : 0;
@@ -452,8 +452,8 @@ var pcg = {
                 this.elements.canvas.addEventListener("touchmove", this.events.pointerMove.bind(this), false);
                 this.elements.canvas.addEventListener("touchend", this.events.pointerUp.bind(this), false);
 
-                this.elements.canvas.addEventListener("DOMMouseScroll", this.events.scroll.bind(this), false);
-                this.elements.canvas.addEventListener("mousewheel", this.events.scroll.bind(this), false);
+                this.elements.canvas.addEventListener("DOMMouseScroll", this.events.zoom.bind(this), false);
+                this.elements.canvas.addEventListener("mousewheel", this.events.zoom.bind(this), false);
             }
 
             // add the beta notice
