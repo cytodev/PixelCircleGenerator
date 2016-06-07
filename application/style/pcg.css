@@ -221,6 +221,7 @@
     position: relative;
 }
 
+#ClearButton,
 #visualise {
     background-color: #1E88E5;
     border-radius: 2px;
@@ -236,11 +237,19 @@
             transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
 }
 
+#ClearButton {
+    opacity: 0;
+    -webkit-transition: opacity .2s cubic-bezier(.4, 0, .2, 1), margin-right .2s cubic-bezier(.4, 0, .2, 1);
+            transition: opacity .2s cubic-bezier(.4, 0, .2, 1), margin-right .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+#ClearButton:hover,
 #visualise:hover {
     background-color: #2196F3;
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
-};
+}
 
+#ClearButton:active,
 #visualise:active {
     background-color: #0D47A1;
     box-shadow: 0 2px 1.5px 0 rgba(0, 0, 0, .12), 0 0 4px 0 rgba(0, 0, 0, .12);
