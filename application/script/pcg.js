@@ -1,4 +1,4 @@
-/** Pixel Circle Generator V0.1.3
+/** Pixel Circle Generator V0.1.4
  *
  * (c) Roel Walraven (cytodev) <mail@cytodev.io>
  *
@@ -7,7 +7,7 @@
 "use strict";
 
 var pcg = {
-        version: "0.1.3",
+        version: "0.1.4",
         beta: true,
         elements: {
             continuousSwitch: undefined,
