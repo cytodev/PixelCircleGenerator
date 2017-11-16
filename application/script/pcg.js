@@ -292,7 +292,7 @@ var pcg = {
                         configuration.lastX = e.touches[0].pageX - canvasElement.offsetLeft;
                         configuration.lastY = e.touches[0].pageY - canvasElement.offsetTop;
                     }
-                } else {        
+                } else {
                     configuration.lastX = e.offsetX || (e.pageX - canvasElement.offsetLeft);
                     configuration.lastY = e.offsetY || (e.pageY - canvasElement.offsetTop);
                 }
