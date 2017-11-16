@@ -1,4 +1,4 @@
-/** Pixel Circle Generator V0.1.3
+/** Pixel Circle Generator V0.1.4
  *
  * (c) Roel Walraven (cytodev) <mail@cytodev.io>
  *
@@ -7,7 +7,7 @@
 "use strict";
 
 var pcg = {
-        version: "0.1.3",
+        version: "0.1.4",
         beta: true,
         elements: {
             continuousSwitch: undefined,
@@ -292,7 +292,7 @@ var pcg = {
                         configuration.lastX = e.touches[0].pageX - canvasElement.offsetLeft;
                         configuration.lastY = e.touches[0].pageY - canvasElement.offsetTop;
                     }
-                } else {        
+                } else {
                     configuration.lastX = e.offsetX || (e.pageX - canvasElement.offsetLeft);
                     configuration.lastY = e.offsetY || (e.pageY - canvasElement.offsetTop);
                 }
@@ -442,6 +442,9 @@ var pcg = {
                 this.elements.canvas.addEventListener("pointerdown", this.events.pointerDown.bind(this), false);
                 this.elements.canvas.addEventListener("pointermove", this.events.pointerMove.bind(this), false);
                 this.elements.canvas.addEventListener("pointerup", this.events.pointerUp.bind(this), false);
+
+                this.elements.canvas.addEventListener("DOMMouseScroll", this.events.zoom.bind(this), false);
+                this.elements.canvas.addEventListener("mousewheel", this.events.zoom.bind(this), false);
             } else {
                 window.console.log("Pointer events not supported. Defaulting to mouse and touch events");
                 this.elements.canvas.addEventListener("mousedown", this.events.pointerDown.bind(this), false);
