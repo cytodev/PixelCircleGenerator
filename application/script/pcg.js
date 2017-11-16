@@ -442,6 +442,9 @@ var pcg = {
                 this.elements.canvas.addEventListener("pointerdown", this.events.pointerDown.bind(this), false);
                 this.elements.canvas.addEventListener("pointermove", this.events.pointerMove.bind(this), false);
                 this.elements.canvas.addEventListener("pointerup", this.events.pointerUp.bind(this), false);
+
+                this.elements.canvas.addEventListener("DOMMouseScroll", this.events.zoom.bind(this), false);
+                this.elements.canvas.addEventListener("mousewheel", this.events.zoom.bind(this), false);
             } else {
                 window.console.log("Pointer events not supported. Defaulting to mouse and touch events");
                 this.elements.canvas.addEventListener("mousedown", this.events.pointerDown.bind(this), false);
